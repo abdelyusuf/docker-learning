@@ -1,123 +1,138 @@
-# Flask & Redis Multi-Container Application
+# Docker Commands Reference
 
-This project sets up a multi-container application using Docker Compose. It consists of a Flask web application and a Redis database. The Flask app interacts with Redis to store and retrieve the visit count.
+This document provides a collection of commonly used Docker commands along with their descriptions. Use this guide to help you manage your Docker containers, images, and volumes effectively.
 
-## Prerequisites
+## Basic Commands
 
-- [Docker](https://docs.docker.com/get-docker/) installed
-- [Docker Compose](https://docs.docker.com/compose/install/) installed
-
-## Project Structure
-
-```
-.
-├── app.py               # Flask web application
-├── Dockerfile           # Dockerfile to build the Flask app image
-├── requirements.txt     # Python dependencies
-├── docker-compose.yml   # Docker Compose configuration file
-└── README.md            # This README file
-```
-
-## Setup Instructions
-
-### 1. Clone the Repository
+### 1. Docker Version
+Check the installed version of Docker.
 
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+docker --version
 ```
 
-### 2. Build and Run the Application
-
-To build the Docker images and start the containers:
+### 2. List Docker Images
+List all Docker images on your machine.
 
 ```bash
-docker-compose up --build
+docker images
 ```
 
-- This command builds the Flask app image and starts both the Flask app and Redis containers.
+### 3. List Running Containers
+Show all currently running Docker containers.
 
-### 3. Access the Application
-
-Once the containers are up and running, you can access the application by navigating to the following URLs in your web browser:
-
-- Flask welcome page: [http://localhost:5002](http://localhost:5002)
-- Visit count page: [http://localhost:5002/count](http://localhost:5002/count)
-
-### 4. Stopping the Application
-
-To stop and remove the containers without removing the built images:
-
-```bash
-docker-compose down
-```
-
-### 5. Useful Docker Commands
-
-Here are some common Docker and Docker Compose commands that are useful for managing the application:
-
-#### Build the Docker Containers
-```bash
-docker-compose build
-```
-
-#### Start the Containers in the Background (Detached Mode)
-```bash
-docker-compose up -d
-```
-
-#### View Logs for All Services
-```bash
-docker-compose logs
-```
-
-#### View Logs for a Specific Service (e.g., web)
-```bash
-docker-compose logs web
-```
-
-#### Stop the Running Containers
-```bash
-docker-compose down
-```
-
-#### Stop Containers and Remove Volumes
-```bash
-docker-compose down --volumes
-```
-
-#### Rebuild Containers Without Using Cache
-```bash
-docker-compose build --no-cache
-```
-
-#### List Running Containers
 ```bash
 docker ps
 ```
 
-#### Check Container Resource Usage
+### 4. List All Containers
+Show all containers, including those that are stopped.
+
 ```bash
-docker stats
+docker ps -a
 ```
 
-#### Clean Up Docker Resources (Unused Images, Containers, Volumes)
+### 5. Pull an Image
+Download a Docker image from Docker Hub.
+
+```bash
+docker pull <image-name>
+```
+
+### 6. Run a Container
+Create and start a new container from an image.
+
+```bash
+docker run <options> <image-name>
+```
+
+### 7. Stop a Running Container
+Stop a running container.
+
+```bash
+docker stop <container-id>
+```
+
+### 8. Remove a Container
+Remove a stopped container.
+
+```bash
+docker rm <container-id>
+```
+
+### 9. Remove an Image
+Delete an image from your local machine.
+
+```bash
+docker rmi <image-name>
+```
+
+## Docker Compose Commands
+
+### 10. Build Docker Containers
+Build or rebuild services defined in the `docker-compose.yml` file.
+
+```bash
+docker-compose build
+```
+
+### 11. Start Services
+Start all services defined in the `docker-compose.yml` file.
+
+```bash
+docker-compose up
+```
+
+### 12. Start Services in Detached Mode
+Start services in the background (detached mode).
+
+```bash
+docker-compose up -d
+```
+
+### 13. Stop Services
+Stop running services without removing containers.
+
+```bash
+docker-compose stop
+```
+
+### 14. Stop and Remove Services
+Stop and remove all services and their containers.
+
+```bash
+docker-compose down
+```
+
+### 15. View Logs
+View logs from all services or a specific service.
+
+```bash
+docker-compose logs              # All services
+docker-compose logs <service>    # Specific service
+```
+
+## System Management Commands
+
+### 16. Clean Up Docker Resources
+Remove unused data, including stopped containers and unused images.
+
+```bash
+docker system prune
+```
+
+### 17. Remove All Unused Images and Volumes
+Remove all unused images and volumes from your system.
+
 ```bash
 docker system prune -a --volumes
 ```
 
-### 6. Removing All Containers and Images
+## Troubleshooting Tips
 
-To remove all containers, networks, and images associated with the application:
+- **Check Container Status**: If a container is not starting, use `docker logs <container-id>` to check its logs for errors.
+- **Resource Usage**: Use `docker stats` to monitor the resource usage of running containers.
+- **Inspect Container**: Get detailed information about a container with `docker inspect <container-id>`.
 
-```bash
-docker-compose down --rmi all --volumes
-```
-
-This command removes all images and volumes created by the Compose file, freeing up space on your system.
-
-## Troubleshooting
-
-- **Port Conflict**: If port `5002` or `6379` is already in use, modify the `docker-compose.yml` file to use a different port.
-- **Docker Issues**: If you're facing slow builds or container startup, try cleaning up unused resources with `docker system prune -a --volumes`.
+Feel free to add or modify commands as needed based on your workflow or specific use cases!
 
