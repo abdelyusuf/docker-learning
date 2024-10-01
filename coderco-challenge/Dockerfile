@@ -1,17 +1,14 @@
 # Use the smaller, official Python Alpine base image
-FROM python:3.9-alpine
+FROM python:3.8-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Install dependencies required for building certain Python packages
-RUN apk add --no-cache gcc musl-dev linux-headers
-
 # Copy the requirements.txt file first (for dependency caching)
-COPY requirements.txt .
+COPY . .
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir flask redis
 
 # Copy the current directory contents into the container
 COPY . .

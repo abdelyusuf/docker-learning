@@ -4,7 +4,7 @@ import redis
 app = Flask(__name__)
 
 # Connect to Redis (assuming Redis is running in another container called 'myredis')
-redis_client = redis.StrictRedis(host='myredis', port=6379, db=0, decode_responses=True)
+redis_client = redis.StrictRedis(host='redis', port=6379, db=0, decode_responses=True)
 
 # HTML template for the welcome page (embedded in app.py using render_template_string)
 welcome_page = '''
