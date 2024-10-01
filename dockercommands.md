@@ -134,5 +134,4 @@ docker system prune -a --volumes
 - **Resource Usage**: Use `docker stats` to monitor the resource usage of running containers.
 - **Inspect Container**: Get detailed information about a container with `docker inspect <container-id>`.
 
-Feel free to add or modify commands as needed based on your workflow or specific use cases!
 
